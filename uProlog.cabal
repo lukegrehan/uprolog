@@ -9,7 +9,7 @@ build-type:          Simple
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     UProlog, UProlog.Val, UProlog.State
+  exposed-modules:     UProlog
   other-extensions:    FlexibleInstances, FlexibleContexts
   build-depends:       base >=4.8, logict, mtl, containers
   hs-source-dirs:      src

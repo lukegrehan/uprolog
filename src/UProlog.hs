@@ -1,4 +1,10 @@
-module UProlog where
+module UProlog
+( module UProlog.Val
+, module UProlog.State
+, t, f, tt, nandP, notP
+, andP, orP, memberP, appendP
+) where
+
 
 import Prelude hiding (any, all, and, or)
 import UProlog.Val
