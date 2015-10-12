@@ -1,16 +1,21 @@
+-- | Values used in the unification graph
 module UProlog.Val where
 
+-- | Indices used to map var to values
 type Id = Integer
 
-data Val = Var Id
+-- | The types used to represent given values in the unification graph.
+data Val = Var Id       -- ^ Identifiers
          | C Char
          | I Integer
          | B Bool
-         | P (Val,Val)
-         | Nil
+         | P (Val,Val)  -- ^ Sum types
+         | Nil          -- ^ Unit value used to represent the end of lists
          deriving (Eq)
 
 
+-- | The class of types representing those that can be lifted from standard
+-- haskell types
 class LogicVal a where
   quote :: a -> Val
 
@@ -42,7 +47,11 @@ instance Show Val where
   show (P(a, b)) = "(" ++ show a ++ " " ++ show b ++ ")"
   show Nil = "()"
 
-mkList :: Val -> [Val]
+-- | Util function to convert from lifted lists to standard haskell lists.
+-- The effect is left undefined in the case when applied to a value that
+-- doesn't represent a list
+mkList :: Val    -- ^ A value that can be seen to represent a list
+       -> [Val]  -- ^ The given list
 mkList (P(a,b)) = (a: mkList b)
 mkList _ = []
 
